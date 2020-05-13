@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>{{ book.bookName }}|鱼伴</title>
+
+
+
+
+<div class="mdui-row">
+  <div class="mdui-col-xs-6 mdui-col-sm-4"></div>
+  <div class="mdui-col-xs-6 mdui-col-sm-4">
+
+      <div class="mdui-card">
+  <div class="mdui-card-media">
+    <img  object-fit="contain"  width="30%" height="30%" src="/media/{{ book.image }}"/>
+    <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+      <div class="mdui-card-primary">
+        <div class="mdui-card-primary-title">{{book.bookName}}</div>
+        <div class="mdui-card-primary-subtitle">{{ book.authorName }}</div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="mdui-col-xs-6 mdui-col-sm-4"></div>
+</div>
+
+
+</div>
+<div class="mdui-tab mdui-tab-full-width" mdui-tab>
+  <a href="#info" class="mdui-ripple">详细</a>
+  <a href="#read" class="mdui-ripple">读过</a>
+  <a href="#comment" class="mdui-ripple">评论</a>
+</div>
+
+<div id="info" class="mdui-p-a-2">
+<div class="mdui-row">
+  <div class="mdui-col-xs-6">
+      <div class="mdui-table-fluid">
+  <table class="mdui-table mdui-table-hoverable">
+    <tbody>
+      <tr>
+        <td>书名</td>
+        <td>{{book.bookName}}</td>
+
+      </tr>
+      <tr>
+        <td>作者</td>
+        <td>{{book.authorName}}</td>
+
+      </tr>
+      <tr>
+        <td>出版社</td>
+        <td>{{ book.pressName }}</td>
+
+      </tr>
+          <tr>
+        <td>页数</td>
+        <td>{{ book.pageNum}}</td>
+      </tr>
+     <tr>
+        <td>定价</td>
+        <td>{{ book.pricingNum}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+  <div class="mdui-col-xs-6">
+<div class="mdui-table-fluid">
+  <table class="mdui-table mdui-table-hoverable">
+    <tbody>
+    <tr><td>推荐率</td><td>{{tuijian}}</td></tr>
+      <tr>
+        <td>推荐</td>
+        <td>      <div class="mdui-progress">
+  <div class="mdui-progress-determinate" style="width: {{positive}};"></div> </div></td>
+      </tr>
+      <tr>
+        <td>一般</td>
+        <td>      <div class="mdui-progress">
+  <div class="mdui-progress-determinate" style="width: {{ moderate }};"></div> </div></td>
+      </tr>
+      <tr>
+        <td>不推荐</td>
+        <td>      <div class="mdui-progress">
+  <div class="mdui-progress-determinate" style="width: {{ negative }};"></div> </div></td>
+      </tr>
+    <tr><td>看过人数</td><td>{{ total }}</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+
+  </div>
+<br><br>
+
+     <div class="mdui-typo">
+         <p>{{ book.introduction|linebreaksbr }}</p></div>
+ </div>
+
+
+
+
+
+    <div id="read" class="mdui-p-a-2">{% for read in reads %}
+        <div class="mdui-panel-item mdui-panel-item-open">
+    <div class="mdui-panel-item-header">{{ read.readUser.username }}</div>
+    <div class="mdui-panel-item-body">
+      <p>{{read.comment}}</p>
+    <p>{{ read.createTime }}</p>
+    </div>
+  </div>
+    {% empty %}
+
+    {% endfor %}</div>
+
+    <div id="comment" class="mdui-p-a-2"><div class="mdui-panel" mdui-panel>{% for com in comments %}
+ <div class="mdui-panel-item">
+    <div class="mdui-panel-item-header">{{ com.commentTitle }}</div>
+    <div class="mdui-panel-item-body">
+      <p>{{ com.comment |linebreaksbr}}</p>
+
+    </div>
+  </div>
+    {% empty %}{% endfor %}</div></div>
+
+     <div class="mdui-fab-wrapper" id="fab">
+    <button class="mdui-fab mdui-ripple mdui-color-pink-accent">
+      <i class="mdui-icon material-icons">add</i>
+      <i class="mdui-icon mdui-fab-opened material-icons">mode_edit</i>
+    </button>
+    <div class="mdui-fab-dial">
+      <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink"><i class="mdui-icon material-icons">backup</i>
+      </button>
+      <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red"><i class="mdui-icon material-icons">bookmark</i>
+      </button>
+      <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange"><i class="mdui-icon material-icons">access_alarms</i>
+      </button>
+      <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue"><i class="mdui-icon material-icons">touch_app</i>
+      </button>
+    </div>
+  </div>
+    <script>
+    var inst = new mdui.Fab('#fab');
+
+// method
+document.getElementById('open').addEventListener('click', function () {
+  inst.open();
+});
+
+document.getElementById('close').addEventListener('click', function () {
+  inst.close();
+});
+
+document.getElementById('hide').addEventListener('click', function () {
+  inst.hide();
+});
+
+document.getElementById('show').addEventListener('click', function () {
+  inst.show();
+});
+
+document.getElementById('getState').addEventListener('click', function () {
+  mdui.alert(inst.getState());
+});
+
+// event
+var fab = document.getElementById('fab');
+fab.addEventListener('open.mdui.fab', function () {
+  console.log('open');
+});
+
+fab.addEventListener('opened.mdui.fab', function () {
+  console.log('opened');
+});
+
+fab.addEventListener('close.mdui.fab', function () {
+  console.log('close');
+});
+
+fab.addEventListener('closed.mdui.fab', function () {
+  console.log('closed');
+});
+
+    </script>
+{% endblock content %}

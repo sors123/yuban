@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
+<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+    <title>修改个人信息</title>
+</head>
+<body>
+  <div class="mdui-container">
+
+
+
+
+
+
+<form method="post" action="{% url 'web:api_edituserinfo' %}" enctype="multipart/form-data" class="form">
+    <img class="mdui-avatar" height="200px" src="/media/{{ userinfo.image }}"/>
+     <input type="file" class="form-control-file" name="avatar" id="avatar">
+    <div class="mdui-textfield">
+  <label class="mdui-textfield-label">个性签名</label>
+  <input class="mdui-textfield-input" type="text" id="qianming" name ="qianming" value="{{ userinfo.text }}"/>
+</div>
+      <div class="mdui-textfield">
+  <label class="mdui-textfield-label">性别</label>
+  <input class="mdui-textfield-input" type="text" id="sex" name="sex" value="{{ userinfo.sex }}"/>
+</div>
+      <div class="mdui-textfield">
+  <label class="mdui-textfield-label">位置</label>
+  <input class="mdui-textfield-input" type="text" id="location" name="location" value="{{ userinfo.location }}"/>
+</div>
+    {% csrf_token %}
+    <button name="submit" class="mdui-btn mdui-color-pink-accent mdui-ripple">提交</button>
+
+</form>
+
+  </div>
+
+
+
+</body>
+</html>

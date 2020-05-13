@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
+<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+    <title>图书分类</title>
+</head>
+<body>
+  <div class="mdui-container">
+
+
+<div class="mdui-tab mdui-tab-scrollable" mdui-tab>
+  {% for i in tags %}
+  <a href="#{{i.tag}}" class="mdui-ripple">{{ i.tag }}</a>
+{% endfor %}
+</div>
+{% for i in tags %}
+      <div id="{{i.tag}}" class="mdui-p-a-2">
+      <div class="mdui-row">
+
+
+      {% for book in i.books %}
+          <div class="mdui-col-xs-6">
+
+          <div class="mdui-grid-tile">
+  <a href="javascript:;"><img src="/media/{{ book.book.image }}"/></a>
+  <div class="mdui-grid-tile-actions">
+    <div class="mdui-grid-tile-text">
+      <div class="mdui-grid-tile-title">{{ book.book.bookName }}</div>
+      <div class="mdui-grid-tile-subtitle">{{ book.book.authorName }}</div>
+    </div>
+  </div>
+</div>
+
+          </div>
+
+      {% endfor %}
+      </div>
+      </div>
+{% endfor %}
+  </div>
+</body>
+</html>

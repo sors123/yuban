@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
+<script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+
+    <div class="mdui-toolbar">
+  <a mdui-drawer="{target: '#drawer'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
+  <span class="mdui-typo-title">鱼伴</span>
+  <div class="mdui-toolbar-spacer"></div>
+  <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
+  <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">refresh</i></a>
+  <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">more_vert</i></a>
+
+</div>
+
+    <div class="mdui-drawer mdui-drawer-close" id="drawer">
+  <ul class="mdui-list">
+      {% if user.is_authenticated %}
+         <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="/media/{{ userinfo.image }}"/>
+    <div class="mdui-card-header-title">{{user.username}}</div>
+    <div class="mdui-card-header-subtitle">{{ userinfo.text }}</div>
+  </div>
+          <a href="{% url 'web:userpage' user.id %}" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">move_to_inbox</i>
+      <div class="mdui-list-item-content">个人主页</div>
+    </a>
+    <a href="{% url 'web:userread' user.id %}" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">star</i>
+      <div class="mdui-list-item-content">读过</div>
+    </a>
+    <li class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">send</i>
+      <div class="mdui-list-item-content">我的收藏</div>
+    </li>
+    <li class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">drafts</i>
+      <div class="mdui-list-item-content">好友动态</div>
+    </li>
+          <a href="{% url 'web:logout' %}" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">drafts</i>
+      <div class="mdui-list-item-content">退出</div>
+    </a>
+
+      {% else %}
+
+          <a href="{% url 'web:login' %}" class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+      <div class="mdui-list-item-content">登录</div>
+        </a>
+          <li class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+      <div class="mdui-list-item-content">注册</div>
+    </li>
+      {%  endif %}
+  <li class="mdui-subheader">鱼伴</li>
+    <li class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">email</i>
+      <div class="mdui-list-item-content">标签</div>
+    </li>
+    <li class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">delete</i>
+      <div class="mdui-list-item-content">新书速递</div>
+    </li>
+    <li class="mdui-list-item mdui-ripple">
+      <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+      <div class="mdui-list-item-content">图书榜单</div>
+    </li>
+  </ul>
+</div>
+
+</head>
+<body>
+  <div class="mdui-container">
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+  </div>
+</body>
+</html>

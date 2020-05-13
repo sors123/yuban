@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>{{ user.username }}读过的书|鱼伴</title>
+<div class="mdui-row">
+  <div class="mdui-col-xs-12 mdui-col-sm-8">
+
+      {% for read in reads %}
+          <div class="mdui-card">
+          <div class="mdui-row">
+              <div class="mdui-col-xs-3" height="200px">
+                  <div class="mdui-grid-tile">
+  <a href="{% url 'web:bookdetail' read.readBook.id %}"><img class="mdui-img-fluid" src="/media/{{ read.readBook.image }}"/></a>
+  <div class="mdui-grid-tile-actions">
+    <div class="mdui-grid-tile-text">
+      <div class="mdui-grid-tile-title">{{read.readBook.bookName}}</div>
+    </div>
+  </div>
+</div></div>
+          <div class="mdui-col-xs-9"><div class="mdui-typo">
+             <p>
+                 {{ read.readBook.authorName }}/{{ read.readBook.pressName }}<br>
+              {{ read.readUser.username }}给出了评价 {% ifequal  read.rating 1 %}<i class="mdui-icon material-icons">&#xe8db;</i>不推荐{% endifequal %}{% ifequal  read.rating 3 %}<i class="mdui-icon material-icons">&#xe8dc;</i>推荐{% endifequal %}{% ifequal  read.rating 2 %}<i class="mdui-icon material-icons">&#xe8dd;</i>一般{% endifequal %}</p>
+            <blockquote>
+    <p>{{ read.comment }}</p>
+    <footer>{{read.createTime}}</footer>
+  </blockquote>
+          </div>
+          </div>
+
+</div></div>
+      {% endfor %}
+
+
+  </div>
+  <div class="mdui-col-xs-6 mdui-col-sm-4">侧边栏</div>
+</div>
+{% endblock content %}
