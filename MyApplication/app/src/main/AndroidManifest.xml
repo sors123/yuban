@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hanyuluo.yuban">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher2"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@drawable/ic_launcher2"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity android:name=".ui.read.WantReadActivity"></activity>
+        <activity android:name=".ui.notifications.webloginActivity" />
+        <activity android:name=".ui.notifications.webeditActivity" />
+        <activity android:name=".ui.notifications.EditUserInfoActivity" />
+        <activity android:name=".ui.dashboard.book.BooksortActivity" />
+        <activity android:name=".ui.dashboard.book.TopbookActivity" />
+        <activity android:name=".ui.dashboard.book.AllbookActivity" />
+        <activity android:name=".ui.dashboard.book.SearchbookActivity" />
+        <activity android:name=".ui.userpage.RegisterActivity" />
+        <activity android:name=".ui.books.NewCommentActivity" />
+        <activity android:name=".ui.books.BookReads.BookReadsActivity" />
+        <activity android:name=".ui.books.DoReadActivity" />
+        <activity android:name=".ui.userpage.UserpageActivity" />
+        <activity android:name=".ui.read.ReadActivity" />
+        <activity android:name=".ui.books.CommentActivity" />
+        <activity android:name=".ui.books.BookDetailActivity" />
+        <activity
+            android:name=".FollowedActivity"
+            android:label="关注的人" />
+        <activity
+            android:name=".FollowActivity"
+            android:label="粉丝" />
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
